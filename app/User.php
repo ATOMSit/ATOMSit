@@ -6,10 +6,11 @@ use Hyn\Tenancy\Traits\UsesTenantConnection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use UsesTenantConnection, Notifiable;
+    use UsesTenantConnection, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
