@@ -72,7 +72,7 @@ return [
          *
          * This should be enabled for MySQL, but not for MariaDB and PostgreSQL.
          */
-        'uuid-limit-length-to-32' => env('LIMIT_UUID_LENGTH_32', false),
+        'uuid-limit-length-to-32' => env('LIMIT_UUID_LENGTH_32', true),
 
         /**
          * Specify the disk you configured in the filesystems.php file where to store
@@ -126,6 +126,7 @@ return [
          * @warn this must be a FQDN, these have no protocol or path!
          */
         'default' => env('TENANCY_DEFAULT_HOSTNAME'),
+
         /**
          * The package is able to identify the requested hostname by itself,
          * disable to get full control (and responsibility) over hostname
@@ -150,7 +151,7 @@ return [
          * Abort application execution in case no hostname was identified. This will throw a
          * 404 not found in case the tenant hostname was not resolved.
          */
-        'abort-without-identified-hostname' => env('TENANCY_ABORT_WITHOUT_HOSTNAME', false),
+        'abort-without-identified-hostname' => env('TENANCY_ABORT_WITHOUT_HOSTNAME', true),
 
         /**
          * Time to cache hostnames in minutes. Set to false to disable.
@@ -164,7 +165,7 @@ return [
          * This will resolve issues with password reset mails etc using the
          * correct domain.
          */
-        'update-app-url' => false,
+        'update-app-url' => true,
     ],
     'db' => [
         /**
@@ -174,6 +175,7 @@ return [
          * connection to - for instance - the tenant connection 'tenant'.
          */
         'default' => env('TENANCY_DEFAULT_CONNECTION'),
+
         /**
          * Used to give names to the system and tenant database connections. By
          * default we configure 'system' and 'tenant'. The tenant connection
@@ -299,7 +301,8 @@ return [
 //            App\User::class
         ],
         'force-system-connection-of-models' => [
-//            App\User::class
+            \App\Website::class,
+            \App\Hostname::class,
         ],
     ],
 
