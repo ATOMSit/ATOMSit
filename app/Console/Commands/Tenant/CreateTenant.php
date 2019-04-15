@@ -2,8 +2,11 @@
 
 namespace App\Console\Commands\Tenant;
 
-use App\Hostname;
 use Illuminate\Console\Command;
+use App\Hostname;
+use App\Website;
+use Hyn\Tenancy\Contracts\Repositories\HostnameRepository;
+use Hyn\Tenancy\Contracts\Repositories\WebsiteRepository;
 
 class CreateTenant extends Command
 {
@@ -38,7 +41,23 @@ class CreateTenant extends Command
      */
     public function handle()
     {
-        $this->hostnames();
+        $website = new Website;
+        app(WebsiteRepository::class)->create($website);
+
+        $hostnames = $this->hostnames();
+        $principal = $this->principal($hostnames);
+
+        foreach ($hostnames as $hostname_item) {
+            $hostname = new Hostname;
+            $hostname->fqdn = $hostname_item;
+            $hostname = app(HostnameRepository::class)->create($hostname);
+            app(HostnameRepository::class)->attach($hostname, $website);
+            if ($hostname_item !== $principal) {
+                $hostname->redirect_to = 'https://' . $principal;
+                $hostname->save();
+            }
+        }
+        return 1;
     }
 
     /**
@@ -80,5 +99,15 @@ class CreateTenant extends Command
             }
         }
         return $hostnames;
+    }
+
+    protected function principal(array $hostnames)
+    {
+        if (count($hostnames) > 1) {
+            $hostname_principal = $this->choice("Nom de domain principal", $hostnames, $hostnames[0]);
+        } else {
+            $hostname_principal = $hostnames[0];
+        }
+        return $hostname_principal;
     }
 }
