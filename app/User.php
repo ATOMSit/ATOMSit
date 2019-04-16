@@ -3,6 +3,7 @@
 namespace App;
 
 use Hyn\Tenancy\Traits\UsesTenantConnection;
+use Greabock\Tentacles\EloquentTentacle;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use UsesTenantConnection, Notifiable, HasRoles;
+    use UsesTenantConnection, EloquentTentacle, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
