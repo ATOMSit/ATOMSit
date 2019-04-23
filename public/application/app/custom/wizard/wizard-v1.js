@@ -12,6 +12,26 @@ var KTWizard1 = function () {
                 }, 500)
             }), r = e.validate({
                 ignore: ":hidden",
+                rules: {
+                    address1: {required: !0},
+                    postcode: {required: !0},
+                    city: {required: !0},
+                    state: {required: !0},
+                    country: {required: !0},
+                    package: {required: !0},
+                    weight: {required: !0},
+                    width: {required: !0},
+                    height: {required: !0},
+                    length: {required: !0},
+                    delivery: {required: !0},
+                    packaging: {required: !0},
+                    preferreddelivery: {required: !0},
+                    locaddress1: {required: !0},
+                    locpostcode: {required: !0},
+                    loccity: {required: !0},
+                    locstate: {required: !0},
+                    loccountry: {required: !0}
+                },
                 invalidHandler: function (e, r) {
                     KTUtil.scrollTop(), swal.fire({
                         title: "",
@@ -23,7 +43,11 @@ var KTWizard1 = function () {
                 submitHandler: function (e) {
                 }
             }), (i = e.find('[data-ktwizard-type="action-submit"]')).on("click", function (t) {
-                e.submit();
+                t.preventDefault(), r.form() && (KTApp.progress(i), e.ajaxSubmit({
+                    success: function () {
+                        document.getElementById("kt_form").submit();
+                    }
+                }))
             })
         }
     }

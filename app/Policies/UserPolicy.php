@@ -39,11 +39,8 @@ class UserPolicy
     {
         if ($user->is($model)) {
             return true;
-        } elseif ($user->can('user_show')) {
-            return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -72,11 +69,8 @@ class UserPolicy
     {
         if ($user->is($model)) {
             return true;
-        } elseif ($user->can('user_update')) {
-            return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**

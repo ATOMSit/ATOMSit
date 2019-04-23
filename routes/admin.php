@@ -19,3 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')
     ->name('home');
+
+Route::prefix('users')->as('user.')->group(function () {
+
+    Route::get('edit/{id}', 'UserController@edit')
+        ->name('edit');
+    Route::put('update/{id}', 'UserController@update')
+        ->name('update');
+});
