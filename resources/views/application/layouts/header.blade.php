@@ -12,7 +12,8 @@
                     <span class="kt-header__topbar-username kt-hidden-mobile">
                         {{Auth::user()->first_name}} {{Auth::user()->last_name}}
                     </span>
-                    <img class="kt-hidden" alt="Pic" src="{{asset('application/media/users/300_25.jpg')}}"/>
+                    <img class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold" alt="Pic"
+                         src="{{asset(Auth::user()->getFirstMedia('avatar')->getUrl('thumb'))}}"/>
                 </div>
             </div>
 
@@ -26,6 +27,19 @@
                     </div>
                 </div>
                 <div class="kt-notification">
+                    <a href="{{route('admin.user.edit',['id'=>Auth::user()->id])}}" class="kt-notification__item">
+                        <div class="kt-notification__item-icon">
+                            <i class="flaticon2-calendar-3 kt-font-success"></i>
+                        </div>
+                        <div class="kt-notification__item-details">
+                            <div class="kt-notification__item-title kt-font-bold">
+                                Mon profile
+                            </div>
+                            <div class="kt-notification__item-time">
+                                Modifier mon compte utilisateur
+                            </div>
+                        </div>
+                    </a>
                     <div class="kt-notification__custom">
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" target="_blank"
                            class="btn btn-label-brand btn-sm btn-bold">

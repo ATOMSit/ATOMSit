@@ -7,11 +7,14 @@ use Greabock\Tentacles\EloquentTentacle;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use UsesTenantConnection, EloquentTentacle, Notifiable, HasRoles;
+    use UsesTenantConnection, EloquentTentacle, Notifiable, HasRoles, HasMediaTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -56,4 +59,15 @@ class User extends Authenticatable
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
+
+    public function registerMediaCollections()
+    {
+        $this
+            ->addMediaCollection('avatar')
+            ->registerMediaConversions(function (Media $media) {
+                $this
+                    ->addMediaConversion('thumb')
+                    ->fit(Manipulations::FIT_STRETCH, 250, 250);
+            });
+    }
 }

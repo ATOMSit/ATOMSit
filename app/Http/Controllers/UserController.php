@@ -96,6 +96,11 @@ class UserController extends Controller
             DB::rollback();
             return response()->json(['error' => $ex->getMessage()], 500);
         }
+        if ($request->file('avatar') !== null) {
+            $user->addMediaFromRequest('avatar')
+                ->preservingOriginal()
+                ->toMediaCollection('avatar');
+        }
         return back();
     }
 

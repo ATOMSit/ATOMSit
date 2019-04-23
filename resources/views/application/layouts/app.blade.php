@@ -34,7 +34,21 @@
             @includeIf('application.layouts.header')
             <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
                 <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-                    @yield('content')
+                    @yield('breadcrumbs')
+                    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+                        @if(session('success') || session('errors'))
+                            @component('application.layouts.alert')
+                                @slot('class')
+                                    @if(session('success'))
+                                        success
+                                    @elseif(session('errors'))
+                                        danger
+                                    @endif
+                                @endslot
+                            @endcomponent
+                        @endif
+                        @yield('content')
+                    </div>
                 </div>
             </div>
             @includeIf('application.layouts.footer')
