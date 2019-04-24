@@ -1,5 +1,10 @@
 @extends('application.layouts.app')
 
+@section('title')
+    Modification d'un utilisateur
+@endsection
+
+
 @push('styles')
 
 @endpush

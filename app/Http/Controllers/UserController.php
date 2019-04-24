@@ -91,17 +91,19 @@ class UserController extends Controller
                 'last_name' => $request->get('last_name'),
                 'email' => $request->get('email')
             ]);
+            if ($request->file('avatar') !== null) {
+                $user->clearMediaCollection('avatar');
+                $user->addMediaFromRequest('avatar')
+                    ->preservingOriginal()
+                    ->toMediaCollection('avatar');
+            }
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollback();
             return response()->json(['error' => $ex->getMessage()], 500);
         }
-        if ($request->file('avatar') !== null) {
-            $user->addMediaFromRequest('avatar')
-                ->preservingOriginal()
-                ->toMediaCollection('avatar');
-        }
-        return back();
+        return back()
+            ->with('success', "Profile mis à jour");
     }
 
     /**
