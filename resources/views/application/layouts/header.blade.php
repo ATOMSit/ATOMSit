@@ -13,7 +13,7 @@
                         {{Auth::user()->first_name}} {{Auth::user()->last_name}}
                     </span>
                     <img class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold" alt="Pic"
-                         src="{{asset(Auth::user()->getFirstMedia('avatar')->getUrl('thumb'))}}"/>
+                         src="{{asset(Auth::user()->avatar())}}"/>
                 </div>
             </div>
 

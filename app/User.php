@@ -60,14 +60,49 @@ class User extends Authenticatable implements HasMedia
         'updated_at' => 'datetime'
     ];
 
+    /**
+     * Return the name of the highest role.
+     *
+     * @return string
+     */
+    public function role()
+    {
+        if (sizeof($this->roles->pluck('name')) === 0) {
+            return "Ok";
+        } else {
+            return $this->roles->pluck('name')[0];
+        }
+    }
+
+    /**
+     * Returns the user avatar's URL.
+     *
+     * @return string
+     */
+    public function avatar()
+    {
+        if ($this->getFirstMedia('avatar') !== null) {
+            return $this->getFirstMedia('avatar')->getUrl('thumb');
+        } elseif ($this->getFirstMedia('avatar') === null) {
+            return "https://cdn.pixabay.com/photo/2016/06/18/17/42/image-1465348_960_720.jpg";
+        }
+    }
+
+    /*
+     * Definition of collections for the media
+     *
+     * Return MediaCollection
+     */
     public function registerMediaCollections()
     {
         $this
             ->addMediaCollection('avatar')
+            ->singleFile()
             ->registerMediaConversions(function (Media $media) {
                 $this
                     ->addMediaConversion('thumb')
                     ->fit(Manipulations::FIT_STRETCH, 250, 250);
             });
+
     }
 }

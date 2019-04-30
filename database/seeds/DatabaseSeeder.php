@@ -16,9 +16,8 @@ class DatabaseSeeder extends Seeder
         $modules = Module::all();
         foreach ($modules as $module) {
             $name = $module->get('name');
-            if (file_exists('Modules\\' . $name . '\\Database\\Seeders\\DatabaseSeeder.php')) {
-                $this->call('Modules\\' . $name . '\\Database\\Seeders\\DatabaseSeeder');
-            }
+                $this->call('Modules\\' . $name . '\\Database\\Seeders\\' . $name . 'DatabaseSeeder');
+
         }
     }
 }

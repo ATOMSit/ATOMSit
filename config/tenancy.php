@@ -199,7 +199,7 @@ return [
          *
          * @see src/Database/Connection.php
          */
-        'tenant-division-mode' => env('TENANCY_DATABASE_DIVISION_MODE', 'schema'),
+        'tenant-division-mode' => env('TENANCY_DATABASE_DIVISION_MODE', 'database'),
 
         /**
          * The database password generator takes care of creating a valid hashed
