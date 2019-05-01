@@ -17,7 +17,7 @@ class CreateAdvicesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')
                 ->unique();
-            $table->string('body');
+            $table->text('body');
             $table->bigInteger('option_id')
                 ->unsigned();
             $table->foreign('option_id')

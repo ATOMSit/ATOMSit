@@ -16,7 +16,7 @@ class TenantDatabaseSeeder extends Seeder
         $modules = Module::all();
         foreach ($modules as $module) {
             $name = $module->get('name');
-            $this->call('Modules\\' . $name . '\\Database\\Seeders\\' . $name . 'DatabaseSeeder');
+            $this->call('Modules\\' . $name . '\\Database\\Seeders\\' . $name . 'TenantDatabaseSeeder');
         }
     }
 }

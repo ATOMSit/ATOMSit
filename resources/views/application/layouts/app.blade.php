@@ -64,6 +64,5 @@
 <script src="{{asset('application/app/custom/general/dashboard.js')}}" type="text/javascript"></script>
 <script src="{{asset('application/app/bundle/app.bundle.js')}}" type="text/javascript"></script>
 @stack('scripts')
-
 </body>
 </html>
