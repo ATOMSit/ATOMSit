@@ -3,6 +3,9 @@
         <i class="flaticon-questions-circular-button"></i>
     </div>
     <div class="alert-text">
+        <b>
+            Conseils et Astuces :
+        </b>
         {{$advice[0]['body']}}
     </div>
 </div>
