@@ -230,7 +230,7 @@ return [
          *
          * @warn specify a valid fully qualified class name.
          */
-        'tenant-seed-class' => DatabaseSeeder::class,
+        'tenant-seed-class' => TenantDatabaseSeeder::class,
 
         /**
          * Automatically generate a tenant database based on the random id of the
@@ -301,6 +301,8 @@ return [
         'force-system-connection-of-models' => [
             \App\Website::class,
             \App\Hostname::class,
+            \App\Option::class,
+            \App\Advice::class
         ],
     ],
 

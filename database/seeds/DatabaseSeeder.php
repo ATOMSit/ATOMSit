@@ -12,12 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(PermissionsTableSeeder::class);
-        $modules = Module::all();
-        foreach ($modules as $module) {
-            $name = $module->get('name');
-                $this->call('Modules\\' . $name . '\\Database\\Seeders\\' . $name . 'DatabaseSeeder');
-
-        }
+        $this->call(OptionsTableSeeder::class);
+        $this->call(AdvicesTableSeeder::class);
     }
 }
